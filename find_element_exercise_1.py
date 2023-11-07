@@ -1,12 +1,14 @@
-from selenium.webdriver.common.by import By
 from selenium import webdriver
 
 driver = webdriver.Chrome()
-
 driver.get("https://qa-mesto.praktikum-services.ru/")
 
-# найди заголовок
-elm = driver.find_element(By.CSS_SELECTOR, '.auth-form__title')
+# Код, который добавляет куку
+new_cookie = {"name": "my_first_cookie", "value": "25"}
+driver.add_cookie(new_cookie)
 
-# Закрой браузер
+# Проверка поля value для добавленной куки
+cookie = driver.get_cookie("my_first_cookie")
+assert cookie['value'] == '25'
+
 driver.quit()
